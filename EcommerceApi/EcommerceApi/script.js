@@ -197,10 +197,20 @@ async function renderProducts() {
             const article = document.createElement('article');
             article.className = 'product-card';
 
-            const imageUrl = product.imageUrl && product.imageUrl !== "" 
-                ? product.imageUrl 
-                : "https://via.placeholder.com/150/4CAF50/white?text=" + encodeURIComponent(product.name);
+            // Use local images from the same folder
+let imageUrl = `${product.name.toLowerCase().replace(/ /g, '')}.png`;
 
+// Special mappings for different names
+if (product.name === "Wireless Mouse") imageUrl = "mouse.png";
+if (product.name === "Coffee Mug") imageUrl = "mug.png";
+if (product.name === "Running Shoes") imageUrl = "shoes.png";
+if (product.name === "Smart Watch") imageUrl = "watch.png";
+if (product.name === "Casual T-Shirt") imageUrl = "tshirt.png";
+if (product.name === "Wireless Headphones") imageUrl = "headphone.png";
+if (product.name === "Denim Jeans") imageUrl = "jeans.png";
+if (product.name === "Backpack") imageUrl = "backpack.png";
+if (product.name === "Phone Case") imageUrl = "case.png";
+if (product.name === "Sunglasses") imageUrl = "sunglasses.jpg";
             article.innerHTML = `
                 <img src="${imageUrl}" alt="${product.name}" style="width:150px; height:150px; object-fit:cover;">
                 <h3>${product.name}</h3>
@@ -221,30 +231,31 @@ async function renderProducts() {
     }
 }
 // Task 3: Event Delegation - Products Page
+// Task 3: Event Delegation - Products Page
 document.body.addEventListener('click', function(event) {
     const addButton = event.target.closest('.add-to-cart');
     if (addButton) {
-        const productId = parseInt(addButton.getAttribute('data-id'));
-        const product = products.find(p => p.id === productId);
+        const product = {
+            id: addButton.getAttribute('data-id'),
+            name: addButton.closest('.product-card').querySelector('h3').textContent,
+            price: parseFloat(addButton.closest('.product-card').querySelector('.price').textContent.replace('₱', ''))
+        };
         
-        if (product) {
-            cart.push(product);
-            saveCart();
-            
-            console.log('Added to cart:', product.name);
-            console.log('Cart now has:', cart.length, 'items');
-            
-            // Task 6: Animation
-            const productCard = addButton.closest('.product-card');
-            if (productCard) {
-                productCard.classList.add('fade-in');
-                setTimeout(() => {
-                    productCard.classList.remove('fade-in');
-                }, 500);
-            }
-
-            alert(`${product.name} added to cart! (${cart.length} items in cart)`);
+        cart.push(product);
+        saveCart();
+        
+        console.log('Added to cart:', product.name);
+        console.log('Cart now has:', cart.length, 'items');
+        
+        const productCard = addButton.closest('.product-card');
+        if (productCard) {
+            productCard.classList.add('fade-in');
+            setTimeout(() => {
+                productCard.classList.remove('fade-in');
+            }, 500);
         }
+
+        alert(`${product.name} added to cart! (${cart.length} items in cart)`);
         renderCart();
     }
 });
