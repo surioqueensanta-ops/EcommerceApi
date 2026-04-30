@@ -2,79 +2,54 @@ package com.ws101.Surio.controller;
 
 import com.ws101.Surio.model.Product;
 import com.ws101.Surio.service.ProductService;
-import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/products")
+@CrossOrigin(origins = "*") // 🔥 allow frontend connection
 public class ProductController {
-    private final ProductService productService;
 
-    public ProductController(ProductService productService) {
-        this.productService = productService;
-    }
+    @Autowired
+    private ProductService service;
 
+    // ✅ GET ALL PRODUCTS
     @GetMapping
-    public ResponseEntity<List<Product>> getAllProducts() {
-        return ResponseEntity.ok(productService.getAllProducts());
+    public List<Product> getAllProducts() {
+        return service.getAllProducts();
     }
 
+    // ✅ GET PRODUCT BY ID
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProductById(@PathVariable Long id) {
-        return productService.getProductById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public Product getProductById(@PathVariable Long id) {
+        return service.getProductById(id)
+                .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
     }
 
-    @GetMapping("/filter")
-    public ResponseEntity<List<Product>> filterProducts(
-            @RequestParam(required = false) String category,
-            @RequestParam(required = false) Double minPrice,
-            @RequestParam(required = false) Double maxPrice,
-            @RequestParam(required = false) String name) {
-        
-        List<Product> filtered = productService.getAllProducts();
-        
-        if (category != null) {
-            filtered = productService.filterByCategory(category);
-        } else if (minPrice != null && maxPrice != null) {
-            filtered = productService.filterByPriceRange(minPrice, maxPrice);
-        } else if (name != null) {
-            filtered = productService.filterByName(name);
-        }
-        
-        return ResponseEntity.ok(filtered);
-    }
-
+    // ✅ CREATE PRODUCT
     @PostMapping
-    public ResponseEntity<Product> createProduct(@Valid @RequestBody Product product) {
-        Product created = productService.createProduct(product);
-        return ResponseEntity.status(HttpStatus.CREATED).body(created);
+    public Product createProduct(@RequestBody Product product) {
+        return service.createProduct(product);
     }
 
+    // ✅ UPDATE PRODUCT
     @PutMapping("/{id}")
-    public ResponseEntity<Product> updateProduct(@PathVariable Long id, @Valid @RequestBody Product product) {
-        return productService.updateProduct(id, product)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public Product updateProduct(@PathVariable Long id, @RequestBody Product product) {
+        return service.updateProduct(id, product)
+                .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<Product> patchProduct(@PathVariable Long id, @RequestBody Product product) {
-        return productService.updateProduct(id, product)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-    }
-
+    // ✅ DELETE PRODUCT
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
-        if (productService.deleteProduct(id)) {
-            return ResponseEntity.noContent().build();
+    public String deleteProduct(@PathVariable Long id) {
+        boolean deleted = service.deleteProduct(id);
+
+        if (deleted) {
+            return "Deleted successfully";
+        } else {
+            throw new RuntimeException("Product not found with id: " + id);
         }
-        return ResponseEntity.notFound().build();
     }
 }

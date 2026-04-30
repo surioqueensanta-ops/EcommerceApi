@@ -8,14 +8,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
-/**
- * Service class for product-related operations.
- * Provides business logic for CRUD operations on products.
- * This class acts as an intermediary between the API controller and the data storage.
- *
- * @author Queensanta Surio
- * @see Product
- */
 @Service
 public class ProductService {
 
@@ -23,7 +15,6 @@ public class ProductService {
     private final AtomicLong idCounter = new AtomicLong(1);
 
     public ProductService() {
-        // Add 10 sample products
         products.add(new Product(idCounter.getAndIncrement(), "Laptop", "High-performance laptop", 999.99, "Electronics", 10, "laptop.jpg"));
         products.add(new Product(idCounter.getAndIncrement(), "Mouse", "Wireless mouse", 29.99, "Electronics", 50, "mouse.jpg"));
         products.add(new Product(idCounter.getAndIncrement(), "Keyboard", "Mechanical keyboard", 89.99, "Electronics", 30, "keyboard.jpg"));
@@ -36,46 +27,22 @@ public class ProductService {
         products.add(new Product(idCounter.getAndIncrement(), "Shoes", "Running shoes", 129.99, "Footwear", 35, "shoes.jpg"));
     }
 
-    /**
-     * Retrieves all products from the in-memory database.
-     *
-     * @return List of all products, empty list if no products exist
-     */
     public List<Product> getAllProducts() {
         return new ArrayList<>(products);
     }
 
-    /**
-     * Finds a product by its unique ID.
-     *
-     * @param id the product ID to search for (must not be null)
-     * @return Optional containing the product if found, empty Optional otherwise
-     */
     public Optional<Product> getProductById(Long id) {
         return products.stream()
                 .filter(p -> p.getId() != null && p.getId().equals(id))
                 .findFirst();
     }
 
-    /**
-     * Creates a new product and assigns a unique ID.
-     *
-     * @param product the product to create (must not be null)
-     * @return the created product with assigned ID
-     */
     public Product createProduct(Product product) {
         product.setId(idCounter.getAndIncrement());
         products.add(product);
         return product;
     }
 
-    /**
-     * Updates an existing product by ID.
-     *
-     * @param id the ID of the product to update
-     * @param updatedProduct the updated product data
-     * @return Optional containing the updated product if found, empty Optional otherwise
-     */
     public Optional<Product> updateProduct(Long id, Product updatedProduct) {
         return getProductById(id).map(existing -> {
             existing.setName(updatedProduct.getName());
@@ -88,47 +55,24 @@ public class ProductService {
         });
     }
 
-    /**
-     * Deletes a product by its ID.
-     *
-     * @param id the ID of the product to delete
-     * @return true if the product was deleted, false if not found
-     */
     public boolean deleteProduct(Long id) {
         return products.removeIf(p -> p.getId() != null && p.getId().equals(id));
     }
 
-    /**
-     * Filters products by category.
-     *
-     * @param category the category to filter by (case-insensitive)
-     * @return List of products matching the category
-     */
     public List<Product> filterByCategory(String category) {
         return products.stream()
                 .filter(p -> p.getCategory() != null && p.getCategory().equalsIgnoreCase(category))
                 .toList();
     }
 
-    /**
-     * Filters products by price range.
-     *
-     * @param min the minimum price (inclusive)
-     * @param max the maximum price (inclusive)
-     * @return List of products within the price range
-     */
+    // ✅ FIXED METHOD (THIS WAS YOUR ERROR)
     public List<Product> filterByPriceRange(Double min, Double max) {
         return products.stream()
-                .filter(p -> p.getPrice() != null && p.getPrice() >= min && p.getPrice() <= max)
+                .filter(p -> (min == null || p.getPrice() >= min) &&
+                             (max == null || p.getPrice() <= max))
                 .toList();
     }
 
-    /**
-     * Filters products by name (partial match, case-insensitive).
-     *
-     * @param name the name or partial name to search for
-     * @return List of products with names containing the search term
-     */
     public List<Product> filterByName(String name) {
         return products.stream()
                 .filter(p -> p.getName() != null && p.getName().toLowerCase().contains(name.toLowerCase()))
