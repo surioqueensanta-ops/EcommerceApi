@@ -1,0 +1,703 @@
+:root {
+    --primary-color: #1e3a8a;
+    --accent-color: #f59e0b;
+    --bg-light: #f1f5f9;
+    --text-main: #1f2937;
+    --card-bg: #ffffff;
+    --shadow-sm: 0 4px 8px rgba(0,0,0,0.08);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: lightblue;
+    color: var(--text-main);
+    margin: 0;
+    padding: 15px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+}
+
+h1, h2, h3, h4 {
+    font-family: Georgia, serif;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+/* Header Styles */
+header {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-md);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+header h1 {
+    margin-bottom: 0;
+    text-align: center;
+}
+
+nav {
+    width: 100%;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+nav li {
+    width: 100%;
+    text-align: center;
+    margin-right: 0;
+}
+
+/* Images */
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+}
+
+/* Links */
+a {
+    text-decoration: none;
+    color: white;
+    background: var(--primary-color);
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+a:hover {
+    background: var(--accent-color);
+    transform: translateY(-2px);
+}
+
+/* Buttons */
+button {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+button:hover {
+    background: var(--accent-color);
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+/* Input Focus */
+input:focus {
+    outline: 2px solid var(--accent-color);
+}
+
+/* Sections */
+section {
+    background: var(--card-bg);
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: var(--shadow-sm);
+}
+
+aside {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 20px;
+}
+
+/* ============================================
+   TASK 2: PRODUCT GRID LAYOUT
+   ============================================ */
+
+/* Product Grid Container - Displays products in a grid */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Product Card Styles */
+.product-card {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: var(--shadow-md);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+}
+
+.product-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.product-card h3 {
+    font-size: 1.1rem;
+    margin: 10px 0;
+    color: var(--primary-color);
+}
+
+.product-card .price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--accent-color);
+    margin: 10px 0;
+}
+
+.add-to-cart {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.add-to-cart:hover {
+    background: var(--accent-color);
+    transform: translateY(-2px);
+}
+
+/* Keep main styles for other pages (not product page) */
+main:not(:has(.product-grid)) {
+    display: block;
+    margin-bottom: 20px;
+}
+
+/* ============================================
+   TASK 3: CART STYLES
+   ============================================ */
+
+section ul {
+    list-style: none;
+}
+
+.cart-list {
+    list-style: none;
+    padding: 0;
+}
+
+.cart-item {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    border: 1px solid #eee;
+}
+
+.cart-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.cart-item h3 {
+    flex: 1;
+    min-width: 150px;
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.cart-item p {
+    margin: 0;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.cart-quantity {
+    width: 70px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.cart-total {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+/* ============================================
+   TASK 4: FORM STYLES
+   ============================================ */
+
+fieldset {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+legend {
+    font-weight: bold;
+    color: var(--primary-color);
+    padding: 0 5px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+input:required {
+    border-left: 4px solid var(--accent-color);
+}
+
+input:valid {
+    border-color: #22c55e;
+}
+
+/* Error styles for form validation */
+input.error {
+    border: 2px solid #ef4444 !important;
+    background-color: #fee2e2;
+}
+
+.error-message {
+    color: #ef4444;
+    font-size: 0.85rem;
+    display: block;
+    margin-top: 5px;
+}
+
+/* ============================================
+   TASK 5: ORDER HISTORY STYLES
+   ============================================ */
+
+.table-responsive {
+    overflow-x: auto;
+    margin: 15px 0;
+    border-radius: 8px;
+    -webkit-overflow-scrolling: touch;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 300px;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+td:first-child {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+details {
+    background: #f9fafb;
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #e5e7eb;
+}
+
+summary {
+    font-weight: bold;
+    color: var(--primary-color);
+    cursor: pointer;
+    padding: 5px;
+}
+
+summary:hover {
+    color: var(--accent-color);
+}
+
+.order-content {
+    padding: 15px;
+    margin-top: 10px;
+    background: #f9fafb;
+    border-radius: 8px;
+}
+
+details p {
+    margin: 10px 0 0 15px;
+}
+
+/* ============================================
+   TASK 6: ANIMATIONS
+   ============================================ */
+
+/* Fade-in animation for Task 6 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+        background-color: var(--accent-color);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+.hero-text {
+    animation: slideUp 1s ease-out;
+}
+
+button.add-to-cart {
+    position: relative;
+    overflow: hidden;
+}
+
+button:hover {
+    animation: pulse 0.5s ease-in-out;
+}
+
+button:active {
+    animation: shake 0.3s ease-in-out;
+}
+
+/* Blockquote Styles */
+blockquote {
+    background: #f9fafb;
+    padding: 15px;
+    border-left: 5px solid var(--accent-color);
+    border-radius: 6px;
+    margin: 15px 0;
+    position: relative;
+}
+
+blockquote::before {
+    content: "“";
+    font-size: 30px;
+    color: var(--accent-color);
+    opacity: 0.5;
+    position: absolute;
+    top: -5px;
+    left: 5px;
+}
+
+blockquote::after {
+    content: "”";
+    font-size: 30px;
+    color: var(--accent-color);
+    opacity: 0.5;
+    position: absolute;
+    bottom: -15px;
+    right: 5px;
+}
+
+/* Empty cart message */
+.cart-items:empty {
+    border: 2px dashed #ef4444;
+    padding: 30px;
+    text-align: center;
+    background: #ffe4e6;
+    border-radius: 10px;
+    display: block;
+}
+
+.cart-items:empty::before {
+    content: "Your cart is empty";
+    color: #ef4444;
+    font-weight: bold;
+}
+
+.order-list li::marker {
+    color: var(--accent-color);
+    font-size: 1.2em;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/* ============================================
+   MEDIA QUERIES - RESPONSIVE DESIGN
+   ============================================ */
+
+/* Tablet Styles */
+@media screen and (min-width: 481px) {
+    body {
+        padding: 20px;
+    }
+
+    nav ul {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    nav li {
+        width: auto;
+    }
+
+    /* Cart item styles for tablet */
+    section li {
+        flex-wrap: nowrap;
+    }
+
+    section li img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .table-responsive {
+        overflow-x: auto;
+    }
+    
+    table {
+        width: 100%;
+    }
+    
+    /* Product grid on tablet - 2 columns */
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+/* Desktop Styles */
+@media screen and (min-width: 769px) {
+    body {
+        padding: 30px;
+        max-width: 1280px;
+        margin: 0 auto;
+    }
+
+    /* Header styles for desktop */
+    header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 30px;
+    }
+
+    header h1 {
+        margin-bottom: 0;
+        text-align: left;
+    }
+
+    nav {
+        width: auto;
+    }
+
+    nav ul {
+        flex-direction: row;
+        gap: 20px;
+    }
+
+    /* Product grid on desktop - 4 columns */
+    .product-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 25px;
+    }
+
+    /* Products container with filter sidebar */
+    .products-container {
+        display: grid;
+        grid-template-columns: 250px 1fr;  
+        gap: 25px;
+        align-items: start;
+    }
+
+    .products-container aside {
+        margin-bottom: 0;
+        position: sticky;
+        top: 20px;
+    }
+
+    .products-container .product-grid {
+        margin-bottom: 0;
+    }
+
+    /* Checkout layout */
+    .checkout-container {
+        display: grid;
+        grid-template-columns: 1fr 350px; 
+        gap: 25px;
+        align-items: start;
+    }
+
+    .checkout-container aside {
+        margin-bottom: 0;
+        position: sticky;
+        top: 20px;
+    }
+
+    /* Hero section */
+    .hero-section {
+        min-height: 400px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        background: linear-gradient(rgba(30, 58, 138, 0.05), rgba(30, 58, 138, 0.05)), var(--card-bg);
+        padding: 40px;
+    }
+
+    .hero-section h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .hero-section p {
+        font-size: 1.2rem;
+        max-width: 600px;
+    }
+
+    /* Cart layout */
+    .cart-container {
+        display: grid;
+        grid-template-columns: 1fr 300px;
+        gap: 25px;
+        align-items: start;
+    }
+
+    .cart-container aside {
+        margin-bottom: 0;
+        position: sticky;
+        top: 20px;
+    }
+
+    /* Product detail layout */
+    .product-detail {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        align-items: start;
+    }
+
+    .product-detail img {
+        width: 100%;
+        max-height: 400px;
+        object-fit: contain;
+    }
+}
+
+/* Large Desktop Styles */
+@media screen and (min-width: 1281px) {
+    body {
+        padding: 40px;
+        max-width: 1400px;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 30px;
+    }
+}
+
+/* FIX: Remove duplicate peso sign */
+.price::before {
+    content: "" !important;
+}
