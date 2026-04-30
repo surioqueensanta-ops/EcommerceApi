@@ -65,7 +65,6 @@ public class ProductService {
                 .toList();
     }
 
-    // ✅ FIXED METHOD (THIS WAS YOUR ERROR)
     public List<Product> filterByPriceRange(Double min, Double max) {
         return products.stream()
                 .filter(p -> (min == null || p.getPrice() >= min) &&

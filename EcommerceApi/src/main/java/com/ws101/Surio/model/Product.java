@@ -17,10 +17,8 @@ public class Product {
     private int stockQuantity;
     private String imageUrl;
 
-    // ✅ Empty constructor (REQUIRED)
     public Product() {}
 
-    // ✅ Full constructor (THIS FIXES YOUR ERROR)
     public Product(Long id, String name, String description, double price,
                    String category, int stockQuantity, String imageUrl) {
         this.id = id;
@@ -32,7 +30,6 @@ public class Product {
         this.imageUrl = imageUrl;
     }
 
-    // ✅ GETTERS & SETTERS
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

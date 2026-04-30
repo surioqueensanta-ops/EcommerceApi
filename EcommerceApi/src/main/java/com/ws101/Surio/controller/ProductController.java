@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/products")
-@CrossOrigin(origins = "*") // 🔥 allow frontend connection
+@CrossOrigin(origins = "*") // 🔥 
 public class ProductController {
 
     @Autowired
