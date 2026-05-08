@@ -16,6 +16,10 @@ public class Product {
     private String category;
     private int stockQuantity;
     private String imageUrl;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    private Category productCategory;
 
     public Product() {}
 
@@ -30,6 +34,7 @@ public class Product {
         this.imageUrl = imageUrl;
     }
 
+    // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -50,4 +55,7 @@ public class Product {
 
     public String getImageUrl() { return imageUrl; }
     public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
+    
+    public Category getProductCategory() { return productCategory; }
+    public void setProductCategory(Category productCategory) { this.productCategory = productCategory; }
 }

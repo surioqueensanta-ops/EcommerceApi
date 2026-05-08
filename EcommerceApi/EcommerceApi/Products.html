@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Products</title>
+    <title>Our Products | Wander Store</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1>Our Products</h1>
+        <h1>Wander Store</h1>
         <nav>
             <ul>
                 <li><a href="landing.html">Home</a></li>
-                <li><a href="products.html">Products</a></li>
+                <li><a href="products.html" class="active">Products</a></li>
                 <li><a href="cart.html">Cart</a></li>
                 <li><a href="account.html">Account</a></li>
                 <li><a href="signup.html">Sign Up</a></li>
@@ -20,10 +20,49 @@
         </nav>
     </header>
 
-    <main>
-        <!-- Task 2: Empty container for dynamic product rendering -->
-        <div class="product-grid"></div>
+    <main class="products-page">
+        <!-- Products Container - Left Side -->
+        <div class="products-container">
+            <div class="products-header">
+                <h2>All Products</h2>
+                <p>Browse our collection of amazing products</p>
+            </div>
+            <div class="product-grid"></div>
+        </div>
+
+        <!-- Filter Sidebar - Right Side -->
+        <aside class="filter-sidebar">
+            <h3>Filter Products</h3>
+            
+            <div class="filter-group">
+                <h4>Category</h4>
+                <label><input type="checkbox"> Electronics <span>12</span></label>
+                <label><input type="checkbox"> Clothing <span>8</span></label>
+                <label><input type="checkbox"> Accessories <span>6</span></label>
+                <label><input type="checkbox"> Footwear <span>5</span></label>
+            </div>
+
+            <div class="filter-group">
+                <h4>Price Range</h4>
+                <label><input type="radio" name="price"> Under ₱500</label>
+                <label><input type="radio" name="price"> ₱500 - ₱1,000</label>
+                <label><input type="radio" name="price"> Over ₱1,000</label>
+            </div>
+
+            <div class="filter-group">
+                <h4>Rating</h4>
+                <label><input type="checkbox"> 5 Stars</label>
+                <label><input type="checkbox"> 4 Stars & Up</label>
+                <label><input type="checkbox"> 3 Stars & Up</label>
+            </div>
+
+            <button class="reset-filter">Reset Filters</button>
+        </aside>
     </main>
+
+    <footer>
+        <p>&copy; 2025 Wander Store. All rights reserved.</p>
+    </footer>
 
     <script src="script.js"></script>
 </body>

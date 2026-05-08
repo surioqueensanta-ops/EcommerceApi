@@ -1,4 +1,3 @@
-
 // Task 1: Data Structure - Product Class
 class Product {
     constructor(id, name, price, image) {
@@ -19,10 +18,13 @@ const products = [
     new Product(7, "Denim Jeans", 399, "jeans.png"),
     new Product(8, "Coffee Mug", 110, "mug.png"),
     new Product(9, "Sunglasses", 150, "sunglasses.jpg"),
-    new Product(10, "Phone Case", 370, "case.png")
+    new Product(10, "Phone Case", 370, "case.png"),
+    new Product(11, "Laptop", 45999, "laptop.png"),
+    new Product(12, "Keyboard", 2999, "keyboard.png"),
+    new Product(13, "Monitor", 12999, "monitor.png")
 ];
-const API_URL = "http://localhost:8080/products";
-// Task 3: Cart State
+
+const API_URL = "http://localhost:8080/api/v1/products";
 let cart = [];
 
 function loadCart() {
@@ -166,7 +168,7 @@ function initAccountPage() {
     }
 }
 
-// Task 2: Dynamic Product Rendering
+// Task 2: Dynamic Product Rendering with VIEW PRODUCT button
 async function renderProducts() {
     const productGrid = document.querySelector('.product-grid');
     
@@ -183,41 +185,69 @@ async function renderProducts() {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
         
-        const products = await response.json();
-        console.log("Products loaded:", products.length);
+        const productsData = await response.json();
+        console.log("Products loaded:", productsData.length);
 
         productGrid.innerHTML = '';
 
-        if (products.length === 0) {
+        if (productsData.length === 0) {
             productGrid.innerHTML = '<p>No products found. Add some products via Postman!</p>';
             return;
         }
 
-        products.forEach(product => {
+        productsData.forEach(product => {
             const article = document.createElement('article');
             article.className = 'product-card';
 
-            // Use local images from the same folder
-let imageUrl = `${product.name.toLowerCase().replace(/ /g, '')}.png`;
+            // Map product names to image files
+            let imageFile = "";
+            switch(product.name) {
+                case "Laptop": imageFile = "laptop.png"; break;
+                case "Mouse": imageFile = "mouse.png"; break;
+                case "Keyboard": imageFile = "keyboard.png"; break;
+                case "Monitor": imageFile = "monitor.png"; break;
+                case "Headphones": imageFile = "headphone.png"; break;
+                case "Wireless Headphones": imageFile = "headphone.png"; break;
+                case "T-Shirt": imageFile = "tshirt.png"; break;
+                case "Casual T-Shirt": imageFile = "tshirt.png"; break;
+                case "Jeans": imageFile = "jeans.png"; break;
+                case "Denim Jeans": imageFile = "jeans.png"; break;
+                case "Coffee Mug": imageFile = "mug.png"; break;
+                case "Backpack": imageFile = "backpack.png"; break;
+                case "Running Shoes": imageFile = "shoes.png"; break;
+                case "Shoes": imageFile = "shoes.png"; break;
+                case "Smart Watch": imageFile = "watch.png"; break;
+                case "Phone Case": imageFile = "case.png"; break;
+                case "Sunglasses": imageFile = "sunglasses.jpg"; break;
+                default: imageFile = "https://picsum.photos/150/150?random=" + product.id;
+            }
+            
+            const imageUrl = imageFile.startsWith("http") ? imageFile : imageFile;
 
-// Special mappings for different names
-if (product.name === "Wireless Mouse") imageUrl = "mouse.png";
-if (product.name === "Coffee Mug") imageUrl = "mug.png";
-if (product.name === "Running Shoes") imageUrl = "shoes.png";
-if (product.name === "Smart Watch") imageUrl = "watch.png";
-if (product.name === "Casual T-Shirt") imageUrl = "tshirt.png";
-if (product.name === "Wireless Headphones") imageUrl = "headphone.png";
-if (product.name === "Denim Jeans") imageUrl = "jeans.png";
-if (product.name === "Backpack") imageUrl = "backpack.png";
-if (product.name === "Phone Case") imageUrl = "case.png";
-if (product.name === "Sunglasses") imageUrl = "sunglasses.jpg";
+            // Create detail page link based on product name
+            let detailLink = "";
+            const productName = product.name.toLowerCase();
+            
+            if (productName.includes("laptop")) detailLink = "detail-laptop.html";
+            else if (productName.includes("mouse")) detailLink = "detail-mouse.html";
+            else if (productName.includes("keyboard")) detailLink = "detail-keyboard.html";
+            else if (productName.includes("monitor")) detailLink = "detail-monitor.html";
+            else if (productName.includes("headphone")) detailLink = "detail-headphone.html";
+            else if (productName.includes("t-shirt")) detailLink = "detail-tshirt.html";
+            else if (productName.includes("jeans")) detailLink = "detail-jeans.html";
+            else if (productName.includes("mug")) detailLink = "detail-mug.html";
+            else if (productName.includes("backpack")) detailLink = "detail-backpack.html";
+            else if (productName.includes("shoes")) detailLink = "detail-shoes.html";
+            else if (productName.includes("watch")) detailLink = "detail-watch.html";
+            else if (productName.includes("sunglasses")) detailLink = "detail-sunglasses.html";
+            else if (productName.includes("case")) detailLink = "detail-case.html";
+            else detailLink = `detail-${productName.replace(/ /g, '-')}.html`;
+
             article.innerHTML = `
-                <img src="${imageUrl}" alt="${product.name}" style="width:150px; height:150px; object-fit:cover;">
+                <img src="${imageUrl}" alt="${product.name}" style="width:150px; height:150px; object-fit:cover; background:#f0f0f0;">
                 <h3>${product.name}</h3>
-                <p class="price">₱ ${product.price}</p>
-                <button class="add-to-cart" data-id="${product.id}">
-                    Add to Cart
-                </button>
+                <p class="price">₱${product.price}</p>
+                <a href="${detailLink}" class="btn-view">View Product</a>
             `;
 
             productGrid.appendChild(article);
@@ -230,68 +260,45 @@ if (product.name === "Sunglasses") imageUrl = "sunglasses.jpg";
         productGrid.innerHTML = '<p>Error loading products. Please make sure the backend server is running at http://localhost:8080</p>';
     }
 }
-// Task 3: Event Delegation - Products Page
-// Task 3: Event Delegation - Products Page
-document.body.addEventListener('click', function(event) {
-    const addButton = event.target.closest('.add-to-cart');
-    if (addButton) {
-        const product = {
-            id: addButton.getAttribute('data-id'),
-            name: addButton.closest('.product-card').querySelector('h3').textContent,
-            price: parseFloat(addButton.closest('.product-card').querySelector('.price').textContent.replace('₱', ''))
-        };
-        
-        cart.push(product);
-        saveCart();
-        
-        console.log('Added to cart:', product.name);
-        console.log('Cart now has:', cart.length, 'items');
-        
-        const productCard = addButton.closest('.product-card');
-        if (productCard) {
-            productCard.classList.add('fade-in');
-            setTimeout(() => {
-                productCard.classList.remove('fade-in');
-            }, 500);
-        }
 
-        alert(`${product.name} added to cart! (${cart.length} items in cart)`);
-        renderCart();
-    }
-});
-
-// Handle detail page Add to Cart buttons
+// Handle detail page Add to Cart buttons (FIXED)
 document.body.addEventListener('click', function(event) {
     const detailButton = event.target.closest('.add-to-cart-detail');
     if (detailButton) {
+        // Get product data from button attributes
         const productId = parseInt(detailButton.getAttribute('data-id'));
-        const product = products.find(p => p.id === productId);
+        const productName = detailButton.getAttribute('data-name');
+        const productPrice = parseFloat(detailButton.getAttribute('data-price'));
         
-        if (product) {
-            const quantityInput = document.getElementById(`quantity-${productId}`);
-            let quantity = 1;
-            if (quantityInput) {
-                quantity = parseInt(quantityInput.value);
-            }
-            
-            for (let i = 0; i < quantity; i++) {
-                cart.push(product);
-            }
-            saveCart();
-            
-            console.log('Added to cart:', product.name, 'x', quantity);
-            console.log('Cart now has:', cart.length, 'items');
-            
-            const productDetail = detailButton.closest('.product-detail');
-            if (productDetail) {
-                productDetail.classList.add('fade-in');
-                setTimeout(() => {
-                    productDetail.classList.remove('fade-in');
-                }, 500);
-            }
-            
-            alert(`${product.name} x${quantity} added to cart! (${cart.length} items in cart)`);
+        // Get quantity from input field
+        const quantityInput = document.getElementById(`quantity-${productId}`);
+        let quantity = quantityInput ? parseInt(quantityInput.value) : 1;
+        
+        if (isNaN(quantity) || quantity < 1) quantity = 1;
+        
+        // Add to cart
+        for (let i = 0; i < quantity; i++) {
+            cart.push({
+                id: productId,
+                name: productName,
+                price: productPrice
+            });
         }
+        saveCart();
+        
+        console.log('Added to cart:', productName, 'x', quantity);
+        console.log('Cart now has:', cart.length, 'items');
+        
+        // Animation effect
+        const productDetail = detailButton.closest('.product-detail');
+        if (productDetail) {
+            productDetail.classList.add('fade-in');
+            setTimeout(() => {
+                productDetail.classList.remove('fade-in');
+            }, 500);
+        }
+        
+        alert(`${productName} x${quantity} added to cart! (${cart.length} items in cart)`);
         renderCart();
     }
 });
@@ -300,6 +307,8 @@ document.body.addEventListener('click', function(event) {
 function renderCart() {
     const cartList = document.querySelector('.cart-list');
     const cartTotalSpan = document.querySelector('.cart-total');
+    const itemCountSpan = document.getElementById('item-count');
+    const orderTotalSpan = document.getElementById('order-total');
     
     console.log('Rendering cart. Cart items:', cart.length);
     
@@ -318,31 +327,34 @@ function renderCart() {
                 const li = document.createElement('li');
                 li.className = 'cart-item';
                 li.setAttribute('data-index', index);
-                
-                const productText = document.createTextNode(`${item.name} - ${item.price} `);
-                li.appendChild(productText);
-                
-                const quantityInput = document.createElement('input');
-                quantityInput.type = 'number';
-                quantityInput.value = 1;
-                quantityInput.min = 0;
-                quantityInput.className = 'cart-quantity';
-                quantityInput.setAttribute('data-index', index);
-                
-                li.appendChild(quantityInput);
+                li.innerHTML = `
+                    <span>${item.name}</span>
+                    <span>₱${item.price}</span>
+                    <input type="number" class="cart-quantity" data-index="${index}" value="1" min="0" style="width:60px;">
+                    <button class="remove-item" data-index="${index}">Remove</button>
+                `;
                 cartList.appendChild(li);
             });
         }
-    } else {
-        console.log('Cart list not found on this page');
     }
     
-    if (cartTotalSpan) {
-        const total = cart.reduce((sum, item) => sum + item.price, 0);
-        cartTotalSpan.textContent = total;
-        console.log('Cart total:', total);
-    }
+    const total = cart.reduce((sum, item) => sum + item.price, 0);
+    if (cartTotalSpan) cartTotalSpan.textContent = total;
+    if (itemCountSpan) itemCountSpan.textContent = cart.length;
+    if (orderTotalSpan) orderTotalSpan.textContent = total;
 }
+
+// Remove item from cart
+document.body.addEventListener('click', function(event) {
+    const removeBtn = event.target.closest('.remove-item');
+    if (removeBtn) {
+        const index = parseInt(removeBtn.getAttribute('data-index'));
+        cart.splice(index, 1);
+        saveCart();
+        renderCart();
+        setupQuantityListeners();
+    }
+});
 
 // Task 3: Quantity Adjustment
 function setupQuantityListeners() {
@@ -355,12 +367,11 @@ function setupQuantityListeners() {
                 const newQuantity = parseInt(event.target.value);
                 
                 if (newQuantity === 0) {
-                    cart = cart.filter((_, i) => i !== index);
+                    cart.splice(index, 1);
                     saveCart();
+                    renderCart();
+                    setupQuantityListeners();
                 }
-                
-                renderCart();
-                setupQuantityListeners();
             }
         });
     }

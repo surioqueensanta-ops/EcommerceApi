@@ -3,6 +3,7 @@ package com.ws101.Surio.controller;
 import com.ws101.Surio.model.Product;
 import com.ws101.Surio.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,28 +16,36 @@ public class ProductController {
     @Autowired
     private ProductService service;
 
+    // Public - anyone can view products
     @GetMapping
     public List<Product> getAllProducts() {
         return service.getAllProducts();
     }
 
+    // Public - anyone can view a single product
     @GetMapping("/{id}")
     public Product getProductById(@PathVariable Long id) {
         return service.getProductById(id)
                 .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
     }
 
+    // Only ADMIN can create products
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public Product createProduct(@RequestBody Product product) {
         return service.createProduct(product);
     }
 
+    // Only ADMIN can update products
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public Product updateProduct(@PathVariable Long id, @RequestBody Product product) {
         return service.updateProduct(id, product)
                 .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
     }
 
+    // Only ADMIN can delete products
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public String deleteProduct(@PathVariable Long id) {
         boolean deleted = service.deleteProduct(id);

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mechanical Keyboard | Wander Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Wander Store</h1>
+        <nav>
+            <ul>
+                <li><a href="landing.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="account.html">Account</a></li>
+                <li><a href="signup.html">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="product-detail">
+        <div class="product-detail-container">
+            <div class="product-images">
+                <img src="keyboard.png" alt="Mechanical Keyboard" onerror="this.src='https://via.placeholder.com/400'">
+            </div>
+            <div class="product-info">
+                <h2>Mechanical Keyboard</h2>
+                <p class="price">₱2,999</p>
+                <p class="product-description">RGB mechanical keyboard with Cherry MX switches. Tactile feedback and customizable RGB lighting for the ultimate typing experience.</p>
+                <div class="stock-status">In Stock</div>
+                <div class="quantity-selector">
+                    <label for="quantity-12">Quantity:</label>
+                    <input type="number" id="quantity-12" name="quantity" min="1" max="10" value="1">
+                </div>
+                <button type="button" class="add-to-cart-detail" data-id="12" data-name="Mechanical Keyboard" data-price="2999">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product-specs-section">
+            <h3>Technical Specifications</h3>
+            <table class="product-specs">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Switch Type</td>
+                        <td>Cherry MX Brown</td>
+                    </tr>
+                    <tr>
+                        <td>Keycap Material</td>
+                        <td>Double-shot PBT</td>
+                    </tr>
+                    <tr>
+                        <td>Backlight</td>
+                        <td>RGB LED (16.8M colors)</td>
+                    </tr>
+                    <tr>
+                        <td>Connectivity</td>
+                        <td>USB-C Wired</td>
+                    </tr>
+                    <tr>
+                        <td>Size</td>
+                        <td>Full Size (104 keys)</td>
+                    </tr>
+                    <tr>
+                        <td>Cable Length</td>
+                        <td>1.8m Braided</td>
+                    </tr>
+                    <tr>
+                        <td>Compatibility</td>
+                        <td>Windows, Mac, Linux</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="reviews-section">
+            <h3>Customer Reviews</h3>
+            <div class="review-card">
+                <div class="review-rating">★★★★★</div>
+                <blockquote>"Amazing keyboard! The RGB lighting is beautiful and the keys feel great."</blockquote>
+                <p class="review-author">- Alex P.</p>
+                <p class="review-date">Verified Purchase | April 18, 2025</p>
+            </div>
+            <div class="review-card">
+                <div class="review-rating">★★★★★</div>
+                <blockquote>"Great tactile feel. Perfect for programming and gaming."</blockquote>
+                <p class="review-author">- Brian K.</p>
+                <p class="review-date">Verified Purchase | April 12, 2025</p>
+            </div>
+            <div class="review-card">
+                <div class="review-rating">★★★★☆</div>
+                <blockquote>"Solid build quality. The RGB customization is easy to use."</blockquote>
+                <p class="review-author">- Christine L.</p>
+                <p class="review-date">Verified Purchase | April 5, 2025</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Wander Store. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

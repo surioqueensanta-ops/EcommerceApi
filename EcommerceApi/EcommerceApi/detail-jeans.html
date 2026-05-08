@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Denim Jeans | Wander Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Wander Store</h1>
+        <nav>
+            <ul>
+                <li><a href="landing.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="account.html">Account</a></li>
+                <li><a href="signup.html">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="product-detail">
+        <div class="product-detail-container">
+            <div class="product-images"><img src="jeans.png" alt="Denim Jeans" onerror="this.src='https://via.placeholder.com/400'"></div>
+            <div class="product-info">
+                <h2>Denim Jeans</h2>
+                <p class="price">₱399</p>
+                <p class="product-description">Classic denim jeans with perfect fit. Durable and stylish for everyday wear.</p>
+                <div class="stock-status">In Stock</div>
+                <div class="quantity-selector">
+                    <label for="quantity-jeans">Quantity:</label>
+                    <input type="number" id="quantity-jeans" name="quantity" min="1" max="10" value="1">
+                </div>
+                <button type="button" class="add-to-cart-detail" data-id="7" data-name="Denim Jeans" data-price="399">Add to Cart</button>
+            </div>
+        </div>
+        <div class="product-specs-section">
+            <h3>Technical Specifications</h3>
+            <table class="product-specs">
+                <thead><tr><th>Feature</th><th>Details</th></tr></thead>
+                <tbody>
+                    <tr><td>Material</td><td>98% Cotton, 2% Spandex</td></tr>
+                    <tr><td>Available Sizes</td><td>28-38 US</td></tr>
+                    <tr><td>Color Options</td><td>Blue, Black, Gray</td></tr>
+                    <tr><td>Fit Type</td><td>Slim Fit</td></tr>
+                    <tr><td>Care Instructions</td><td>Machine Wash</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="reviews-section">
+            <h3>Customer Reviews</h3>
+            <div class="review-card"><div class="review-rating">★★★★★</div><blockquote>"Perfect fit!"</blockquote><p class="review-author">- Kevin P.</p><p class="review-date">March 11, 2025</p></div>
+            <div class="review-card"><div class="review-rating">★★★★☆</div><blockquote>"Good quality jeans."</blockquote><p class="review-author">- Nicole R.</p><p class="review-date">March 6, 2025</p></div>
+        </div>
+    </main>
+    <footer><p>&copy; 2025 Wander Store. All rights reserved.</p></footer>
+    <script src="script.js"></script>
+</body>
+</html>

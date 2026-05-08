@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - Smart Watch</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Wander Store</h1>
+        <nav>
+            <ul>
+                <li><a href="landing.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="account.html">Account</a></li>
+                <li><a href="signup.html">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="product-detail">
+        <div class="product-detail-container">
+            <div class="product-images">
+                <img src="watch.png" alt="Smart Watch" onerror="this.src='https://via.placeholder.com/400'">
+            </div>
+            
+            <div class="product-info">
+                <h2>Smart Watch</h2>
+                <p class="price">779</p>
+                <p class="product-description">Stylish smart watch with fitness tracking, heart rate monitor, and notifications. Stay connected and track your health goals.</p>
+                
+                <div class="stock-status">In Stock</div>
+                
+                <div class="quantity-selector">
+                    <label for="quantity-2">Quantity:</label>
+                <input type="number" id="quantity-2" name="quantity" min="1" max="10" value="1">
+</div>
+<button type="button" class="add-to-cart-detail" data-id="2" data-name="Smart Watch" data-price="599">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product-specs-section">
+            <h3>Technical Specifications</h3>
+            <table class="product-specs">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Display</td>
+                        <td>1.8" AMOLED</td>
+                    </tr>
+                    <tr>
+                        <td>Battery Life</td>
+                        <td>7 Days</td>
+                    </tr>
+                    <tr>
+                        <td>Water Resistance</td>
+                        <td>5 ATM</td>
+                    </tr>
+                    <tr>
+                        <td>Compatibility</td>
+                        <td>iOS & Android</td>
+                    </tr>
+                    <tr>
+                        <td>Features</td>
+                        <td>Heart Rate, GPS, Step Tracking</td>
+                    </tr>
+                    <tr>
+                        <td>Color Options</td>
+                        <td>Black, Silver, Rose Gold</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="reviews-section">
+            <h3>Customer Reviews</h3>
+            
+            <div class="review-card">
+                <div class="review-rating">★★★★★</div>
+                <blockquote>"Love this watch! The battery lasts a full week and the fitness tracking is accurate."</blockquote>
+                <p class="review-author">- Mike R.</p>
+                <p class="review-date">Verified Purchase | March 12, 2025</p>
+            </div>
+            
+            <div class="review-card">
+                <div class="review-rating">★★★★☆</div>
+                <blockquote>"Great value for money. The display is bright and responsive."</blockquote>
+                <p class="review-author">- Anna T.</p>
+                <p class="review-date">Verified Purchase | March 8, 2025</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Wander Store. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

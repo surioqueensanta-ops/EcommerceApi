@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backpack | Wander Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Wander Store</h1>
+        <nav>
+            <ul>
+                <li><a href="landing.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="account.html">Account</a></li>
+                <li><a href="signup.html">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="product-detail">
+        <div class="product-detail-container">
+            <div class="product-images"><img src="backpack.png" alt="Backpack" onerror="this.src='https://via.placeholder.com/400'"></div>
+            <div class="product-info">
+                <h2>Backpack</h2>
+                <p class="price">₱899</p>
+                <p class="product-description">Durable and spacious backpack with multiple compartments. Perfect for school, work, or travel.</p>
+                <div class="stock-status">In Stock</div>
+                <div class="quantity-selector">
+                    <label for="quantity-backpack">Quantity:</label>
+                    <input type="number" id="quantity-backpack" name="quantity" min="1" max="10" value="1">
+                </div>
+                <button type="button" class="add-to-cart-detail" data-id="5" data-name="Backpack" data-price="899">Add to Cart</button>
+            </div>
+        </div>
+        <div class="product-specs-section">
+            <h3>Technical Specifications</h3>
+            <table class="product-specs">
+                <thead><tr><th>Feature</th><th>Details</th></tr></thead>
+                <tbody>
+                    <tr><td>Capacity</td><td>20 Liters</td></tr>
+                    <tr><td>Material</td><td>Waterproof Nylon</td></tr>
+                    <tr><td>Laptop Compartment</td><td>Fits up to 15.6"</td></tr>
+                    <tr><td>Color Options</td><td>Black, Navy, Gray</td></tr>
+                    <tr><td>Pockets</td><td>2 Main, 1 Front, 2 Side</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="reviews-section">
+            <h3>Customer Reviews</h3>
+            <div class="review-card"><div class="review-rating">★★★★★</div><blockquote>"Great backpack!"</blockquote><p class="review-author">- Mark T.</p><p class="review-date">March 10, 2025</p></div>
+            <div class="review-card"><div class="review-rating">★★★★☆</div><blockquote>"Good quality."</blockquote><p class="review-author">- Jenny L.</p><p class="review-date">March 5, 2025</p></div>
+        </div>
+    </main>
+    <footer><p>&copy; 2025 Wander Store. All rights reserved.</p></footer>
+    <script src="script.js"></script>
+</body>
+</html>

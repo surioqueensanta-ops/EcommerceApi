@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laptop | Wander Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Wander Store</h1>
+        <nav>
+            <ul>
+                <li><a href="landing.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="account.html">Account</a></li>
+                <li><a href="signup.html">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="product-detail">
+        <div class="product-detail-container">
+            <div class="product-images">
+                <img src="laptop.png" alt="Laptop" onerror="this.src='https://via.placeholder.com/400'">
+            </div>
+            <div class="product-info">
+                <h2>High-Performance Laptop</h2>
+                <p class="price">₱45,999</p>
+                <p class="product-description">Powerful laptop with Intel Core i7 processor, 16GB RAM, and 512GB SSD. Perfect for work, gaming, and content creation.</p>
+                <div class="stock-status">In Stock</div>
+                <div class="quantity-selector">
+                    <label for="quantity-laptop">Quantity:</label>
+                    <input type="number" id="quantity-laptop" name="quantity" min="1" max="10" value="1">
+                </div>
+                <button type="button" class="add-to-cart-detail" data-id="11" data-name="Laptop" data-price="45999">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product-specs-section">
+            <h3>Technical Specifications</h3>
+            <table class="product-specs">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Processor</td>
+                        <td>Intel Core i7-13700H</td>
+                    </tr>
+                    <tr>
+                        <td>RAM</td>
+                        <td>16GB DDR5</td>
+                    </tr>
+                    <tr>
+                        <td>Storage</td>
+                        <td>512GB NVMe SSD</td>
+                    </tr>
+                    <tr>
+                        <td>Graphics</td>
+                        <td>NVIDIA GeForce RTX 4050</td>
+                    </tr>
+                    <tr>
+                        <td>Display</td>
+                        <td>15.6" FHD (1920x1080) 144Hz</td>
+                    </tr>
+                    <tr>
+                        <td>Battery Life</td>
+                        <td>Up to 8 hours</td>
+                    </tr>
+                    <tr>
+                        <td>Weight</td>
+                        <td>1.8 kg</td>
+                    </tr>
+                    <tr>
+                        <td>Operating System</td>
+                        <td>Windows 11 Pro</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="reviews-section">
+            <h3>Customer Reviews</h3>
+            <div class="review-card">
+                <div class="review-rating">★★★★★</div>
+                <blockquote>"Excellent laptop! Fast and responsive. Great for gaming and multitasking."</blockquote>
+                <p class="review-author">- John C.</p>
+                <p class="review-date">Verified Purchase | May 20, 2025</p>
+            </div>
+            <div class="review-card">
+                <div class="review-rating">★★★★☆</div>
+                <blockquote>"Good build quality and performance. Battery life could be better."</blockquote>
+                <p class="review-author">- Sarah L.</p>
+                <p class="review-date">Verified Purchase | May 15, 2025</p>
+            </div>
+            <div class="review-card">
+                <div class="review-rating">★★★★★</div>
+                <blockquote>"Best laptop I've ever owned. The screen is amazing!"</blockquote>
+                <p class="review-author">- Michael T.</p>
+                <p class="review-date">Verified Purchase | May 10, 2025</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Wander Store. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
